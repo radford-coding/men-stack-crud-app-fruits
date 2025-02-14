@@ -33,6 +33,12 @@ app.get('/fruits/new', (req, res) => {
     res.render('./fruits/new.ejs');
 });
 
+// GET /fruits/:id
+app.get("/fruits/:fruitId", async (req, res) => {
+    const foundFruit = await Fruit.findById(req.params.fruitId);
+    res.render("fruits/show.ejs", { fruit: foundFruit });
+  });
+
 // POST /fruits
 app.post("/fruits", async (req, res) => {
     if (req.body.isReadyToEat === "on") {
@@ -41,7 +47,7 @@ app.post("/fruits", async (req, res) => {
         req.body.isReadyToEat = false;
     }
     await Fruit.create(req.body);
-    res.redirect("/fruits/new");
+    res.redirect("/fruits");
 });
 
 
