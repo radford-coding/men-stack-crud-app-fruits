@@ -13,12 +13,18 @@ mongoose.connection.on('connected', () => {
 
 const Fruit = require('./models/fruit');
 
-/* ----ROUTES---- */
+/*  */
 
-// GET
+// GET /
 
-app.get('/', async (req, res) => {
+app.get('/', async (req, res) => { // async for database connections
     res.render('index.ejs');
+});
+
+// GET /fruits/new
+
+app.get('/fruits/new', (req, res) => {
+    res.render('./fruits/new.ejs');
 });
 
 
